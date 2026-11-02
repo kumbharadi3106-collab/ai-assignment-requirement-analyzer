@@ -1,0 +1,37 @@
+Assignment: Web Application Development Project
+Course: CS301 - Software Engineering
+
+Objective: Develop a full-stack web application that demonstrates your understanding of modern web development principles.
+
+Deliverables:
+1. A working web application deployed on a local server
+2. Source code with proper documentation
+3. A project report (minimum 10 pages, maximum 15 pages) in PDF format
+4. A 10-minute video demonstration
+5. UML diagrams showing system architecture
+
+Requirements:
+- Use React.js for the frontend
+- Use Node.js and Express.js for the backend
+- Implement user authentication
+- Use a relational database (PostgreSQL or MySQL)
+- Write unit tests for at least 5 functions
+- Follow MVC architecture
+
+Constraints:
+- No frameworks other than React and Express are allowed
+- Maximum team size: 2 students
+- All code must be original - no copying from online sources
+- Report must be written in English
+
+Deadline: November 30, 2024 at 11:59 PM
+
+Submission: Upload all files to the course portal under "Project Submission"
+
+Evaluation:
+- Working application: 40 marks
+- Code quality and documentation: 20 marks
+- Project report: 25 marks
+- Video demonstration: 15 marks
+Total: 100 marks
+

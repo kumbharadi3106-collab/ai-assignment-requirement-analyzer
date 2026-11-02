@@ -1,0 +1,23 @@
+{
+  "name": "ai-assignment-requirement-analyzer",
+  "version": "1.0.0",
+  "private": true,
+  "description": "AI Assignment Requirement Analyzer - Production Full-Stack Application",
+  "scripts": {
+    "build": "cd client && npm install && npm run build",
+    "vercel-build": "cd client && npm install && npm run build",
+    "start": "node server/server.js",
+    "test": "cd server && npm test"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.30.0",
+    "better-sqlite3": "^13.0.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "json2csv": "^6.0.0-alpha.2",
+    "multer": "^1.4.5-lts.1",
+    "pdf-parse": "^1.1.1",
+    "pdfkit": "^0.15.0"
+  }
+}
