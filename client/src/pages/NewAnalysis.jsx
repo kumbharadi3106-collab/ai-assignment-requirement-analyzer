@@ -1,8 +1,8 @@
-import { useState, useRef } from 'react'
+import React, { useState, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
   FileText, Upload, X, Loader, ChevronRight,
-  AlertCircle, RotateCcw, File
+  AlertCircle, RotateCcw, File, Sparkles, CheckCircle2
 } from 'lucide-react'
 import { assignmentsAPI, uploadAPI } from '../services/api'
 import Alert from '../components/Alert'
@@ -106,21 +106,21 @@ export default function NewAnalysis() {
   }
 
   return (
-    <div style={{ maxWidth: 780 }}>
+    <div style={{ maxWidth: 820 }}>
       {/* Mode tabs */}
       <div className="tab-bar">
         <div
           className={`tab-item${mode === 'text' ? ' active' : ''}`}
           onClick={() => { setMode('text'); setError('') }}
         >
-          <FileText size={14} style={{ display: 'inline', marginRight: 6 }} />
+          <FileText size={15} style={{ display: 'inline', marginRight: 6 }} />
           Paste Text
         </div>
         <div
           className={`tab-item${mode === 'upload' ? ' active' : ''}`}
           onClick={() => { setMode('upload'); setError('') }}
         >
-          <Upload size={14} style={{ display: 'inline', marginRight: 6 }} />
+          <Upload size={15} style={{ display: 'inline', marginRight: 6 }} />
           Upload PDF
         </div>
       </div>
@@ -131,7 +131,7 @@ export default function NewAnalysis() {
           <label className="form-label">Assignment Title</label>
           <input
             className="form-input"
-            placeholder="e.g. Web Development Project, Research Paper on AI…"
+            placeholder="e.g. Web Development Project, Research Paper on AI Ethics…"
             value={title}
             onChange={e => setTitle(e.target.value)}
             disabled={loading}
@@ -154,14 +154,15 @@ export default function NewAnalysis() {
               onChange={e => setText(e.target.value)}
               disabled={loading}
             />
-            <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 4 }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 8 }}>
               <span style={{ fontSize: 12, color: 'var(--text-muted)' }}>
-                {text.length} / 50,000 characters
+                {text.length.toLocaleString()} / 50,000 characters
               </span>
               {text && (
                 <button
+                  type="button"
                   className="btn btn-ghost btn-sm"
-                  style={{ fontSize: 12, padding: '2px 8px' }}
+                  style={{ fontSize: 12, padding: '3px 9px' }}
                   onClick={() => setText('')}
                 >
                   <RotateCcw size={11} /> Clear text
@@ -181,19 +182,23 @@ export default function NewAnalysis() {
                 onClick={() => fileInputRef.current?.click()}
               >
                 <div className="upload-area-icon">
-                  <Upload size={22} />
+                  <Upload size={24} />
                 </div>
-                <div style={{ fontWeight: 600, marginBottom: 6, fontSize: 14 }}>
-                  Drag & drop your PDF here
+                <div style={{ fontWeight: 700, marginBottom: 6, fontSize: 15, color: 'var(--text-primary)' }}>
+                  Drag & drop your assignment PDF here
                 </div>
-                <div style={{ color: 'var(--text-muted)', fontSize: 13, marginBottom: 14 }}>
-                  or click to browse files
+                <div style={{ color: 'var(--text-muted)', fontSize: 13, marginBottom: 16 }}>
+                  or click anywhere to browse from your device
                 </div>
-                <button className="btn btn-secondary btn-sm" onClick={e => { e.stopPropagation(); fileInputRef.current?.click() }}>
-                  Browse Files
+                <button
+                  type="button"
+                  className="btn btn-secondary btn-sm"
+                  onClick={e => { e.stopPropagation(); fileInputRef.current?.click() }}
+                >
+                  Browse PDF Files
                 </button>
-                <div style={{ fontSize: 12, color: 'var(--text-muted)', marginTop: 12 }}>
-                  PDF only · Max 10MB
+                <div style={{ fontSize: 12, color: 'var(--text-muted)', marginTop: 14 }}>
+                  Text-based PDF only · Up to 10MB
                 </div>
                 <input
                   ref={fileInputRef}
@@ -205,20 +210,20 @@ export default function NewAnalysis() {
               </div>
             ) : (
               <div style={{
-                display: 'flex', alignItems: 'center', gap: 14, padding: '14px 16px',
-                border: '1px solid var(--border)', borderRadius: 'var(--radius)',
-                background: 'var(--bg)'
+                display: 'flex', alignItems: 'center', gap: 14, padding: '16px 18px',
+                border: '1px solid var(--border-glass)', borderRadius: 'var(--radius)',
+                background: 'var(--bg-subtle)'
               }}>
-                <div style={{ width: 40, height: 40, background: 'var(--primary-light)', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--primary)' }}>
-                  <File size={20} />
+                <div style={{ width: 44, height: 44, background: 'var(--primary-light)', borderRadius: 'var(--radius)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--primary)' }}>
+                  <File size={22} />
                 </div>
-                <div style={{ flex: 1 }}>
-                  <div style={{ fontWeight: 600, fontSize: 13.5 }}>{file.name}</div>
-                  <div style={{ fontSize: 12, color: 'var(--text-muted)' }}>
-                    {(file.size / 1024).toFixed(1)} KB · PDF
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div style={{ fontWeight: 600, fontSize: 14, color: 'var(--text-primary)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{file.name}</div>
+                  <div style={{ fontSize: 12, color: 'var(--text-muted)', marginTop: 2 }}>
+                    {(file.size / 1024).toFixed(1)} KB · PDF Document Ready
                   </div>
                 </div>
-                <button className="btn btn-ghost btn-icon" onClick={() => setFile(null)} disabled={loading}>
+                <button className="btn btn-ghost btn-icon" onClick={() => setFile(null)} disabled={loading} title="Remove file">
                   <X size={16} />
                 </button>
               </div>
@@ -227,26 +232,35 @@ export default function NewAnalysis() {
         )}
 
         {error && (
-          <div style={{ marginBottom: 16 }}>
+          <div style={{ marginBottom: 18 }}>
             <Alert type="error">{error}</Alert>
           </div>
         )}
 
         {loading && (
           <div style={{
-            background: 'var(--primary-light)', borderRadius: 'var(--radius)',
-            padding: '14px 16px', marginBottom: 16,
-            display: 'flex', alignItems: 'center', gap: 12
+            background: 'var(--primary-light)',
+            border: '1px solid var(--primary-glow)',
+            borderRadius: 'var(--radius)',
+            padding: '16px 20px',
+            marginBottom: 20,
+            display: 'flex',
+            alignItems: 'center',
+            gap: 14,
+            animation: 'fadeIn 0.3s ease'
           }}>
-            <Loader size={18} style={{ color: 'var(--primary)', animation: 'spin 1s linear infinite' }} />
+            <Loader size={20} style={{ color: 'var(--primary)', animation: 'spin 1s linear infinite' }} />
             <div>
-              <div style={{ fontWeight: 600, fontSize: 13.5, color: 'var(--primary)' }}>Analyzing with Claude AI…</div>
-              <div style={{ fontSize: 12.5, color: 'var(--primary)', opacity: 0.8 }}>{loadingMsg}</div>
+              <div style={{ fontWeight: 700, fontSize: 14, color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: 6 }}>
+                <span>Analyzing Assignment with AI…</span>
+                <Sparkles size={14} style={{ color: 'var(--primary)' }} />
+              </div>
+              <div style={{ fontSize: 13, color: 'var(--text-secondary)', marginTop: 2 }}>{loadingMsg}</div>
             </div>
           </div>
         )}
 
-        <div style={{ display: 'flex', gap: 10, justifyContent: 'flex-end' }}>
+        <div style={{ display: 'flex', gap: 12, justifyContent: 'flex-end', marginTop: 8 }}>
           <button className="btn btn-secondary" onClick={handleReset} disabled={loading}>
             <RotateCcw size={14} /> Reset
           </button>
@@ -264,16 +278,18 @@ export default function NewAnalysis() {
         </div>
       </div>
 
-      {/* Tips */}
-      <div style={{ marginTop: 20, padding: '14px 18px', background: 'var(--primary-light)', borderRadius: 'var(--radius)', fontSize: 13 }}>
-        <strong style={{ color: 'var(--primary)' }}>💡 Tips for best results:</strong>
-        <ul style={{ marginTop: 6, paddingLeft: 18, color: 'var(--text-secondary)', lineHeight: 1.8 }}>
-          <li>Paste the <strong>complete</strong> assignment brief, not just a summary</li>
-          <li>Include all requirements, deadlines, constraints and submission rules</li>
-          <li>The more complete your input, the better the analysis</li>
+      {/* Glass Tips Card */}
+      <div className="card" style={{ marginTop: 22, padding: '18px 22px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontWeight: 700, fontSize: 13.5, color: 'var(--primary)', marginBottom: 8 }}>
+          <Sparkles size={16} />
+          <span>Tips for highest accuracy:</span>
+        </div>
+        <ul style={{ paddingLeft: 20, display: 'flex', flexDirection: 'column', gap: 6, color: 'var(--text-secondary)', fontSize: 13, lineHeight: 1.6 }}>
+          <li>Paste the <strong>complete</strong> assignment brief, including grading rubrics and word/page constraints.</li>
+          <li>The AI engine automatically identifies conflicting submission dates and ambiguous instructions.</li>
+          <li>For PDFs, ensure they are text-based rather than scanned photo images.</li>
         </ul>
       </div>
     </div>
   )
 }
-

@@ -4,13 +4,23 @@ export default function AboutProject() {
   return (
     <div style={{ maxWidth: 820 }}>
       {/* Hero */}
-      <div className="card" style={{ marginBottom: 20, background: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)', border: 'none', color: 'white', textAlign: 'center', padding: '40px 32px' }}>
-        <div style={{ width: 64, height: 64, background: 'rgba(255,255,255,0.2)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
-          <Brain size={30} />
+      <div className="card" style={{
+        marginBottom: 24,
+        background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.9) 0%, rgba(139, 92, 246, 0.9) 100%)',
+        backdropFilter: 'blur(20px)',
+        WebkitBackdropFilter: 'blur(20px)',
+        border: '1px solid rgba(255, 255, 255, 0.25)',
+        boxShadow: '0 12px 36px -6px rgba(99, 102, 241, 0.35)',
+        color: 'white',
+        textAlign: 'center',
+        padding: '44px 32px'
+      }}>
+        <div style={{ width: 68, height: 68, background: 'rgba(255,255,255,0.2)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 18px', boxShadow: '0 8px 16px rgba(0,0,0,0.1)' }}>
+          <Brain size={32} />
         </div>
-        <h2 style={{ fontSize: 26, fontWeight: 800, marginBottom: 8 }}>AI Assignment Requirement Analyzer</h2>
-        <p style={{ opacity: 0.85, fontSize: 15, maxWidth: 560, margin: '0 auto' }}>
-          An intelligent student productivity tool that uses Claude AI to automatically extract, organize, and track every requirement from your assignment briefs.
+        <h2 style={{ fontSize: 28, fontWeight: 800, marginBottom: 10, letterSpacing: '-0.02em' }}>AI Assignment Requirement Analyzer</h2>
+        <p style={{ opacity: 0.92, fontSize: 15.5, maxWidth: 580, margin: '0 auto', lineHeight: 1.6 }}>
+          An intelligent student productivity application designed with Apple-inspired glassmorphism that automatically extracts, organizes, and tracks every requirement from your assignment briefs.
         </p>
       </div>
 

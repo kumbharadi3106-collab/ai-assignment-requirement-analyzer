@@ -212,11 +212,11 @@ export default function AnalysisResult() {
         <Section icon={<Flag size={16} />} title={`Constraints (${analysis.constraints.length})`}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
             {analysis.constraints.map((c, i) => (
-              <div key={i} style={{ display: 'flex', gap: 10, padding: '10px 14px', background: '#fff8f0', border: '1px solid #fde68a', borderRadius: 'var(--radius)' }}>
-                <AlertTriangle size={14} style={{ color: 'var(--warning)', flexShrink: 0, marginTop: 2 }} />
+              <div key={i} style={{ display: 'flex', gap: 10, padding: '12px 16px', background: 'var(--warning-light)', border: '1px solid var(--border)', borderRadius: 'var(--radius)' }}>
+                <AlertTriangle size={15} style={{ color: 'var(--warning)', flexShrink: 0, marginTop: 2 }} />
                 <div>
-                  {c.type && <span style={{ fontWeight: 600, fontSize: 12.5, color: 'var(--warning)', textTransform: 'uppercase', marginRight: 8 }}>{c.type}</span>}
-                  <span style={{ fontSize: 13.5, color: 'var(--text-secondary)' }}>{c.description}</span>
+                  {c.type && <span style={{ fontWeight: 700, fontSize: 12, color: 'var(--warning)', textTransform: 'uppercase', marginRight: 8 }}>{c.type}</span>}
+                  <span style={{ fontSize: 13.5, color: 'var(--text-primary)' }}>{c.description}</span>
                   {c.sourceText && <SourceQuote text={c.sourceText} />}
                 </div>
               </div>
@@ -228,9 +228,9 @@ export default function AnalysisResult() {
       {/* Deadlines */}
       <Section icon={<Calendar size={16} />} title="Deadlines" defaultOpen>
         {!analysis.deadlines?.length
-          ? <div style={{ padding: '12px 14px', background: '#fffbeb', border: '1px solid #fde68a', borderRadius: 'var(--radius)', display: 'flex', gap: 8, alignItems: 'center' }}>
-              <AlertCircle size={14} style={{ color: 'var(--warning)' }} />
-              <span style={{ fontSize: 13.5, color: '#92400e' }}>No deadline specified in the assignment.</span>
+          ? <div style={{ padding: '12px 16px', background: 'var(--warning-light)', border: '1px solid var(--border)', borderRadius: 'var(--radius)', display: 'flex', gap: 10, alignItems: 'center' }}>
+              <AlertCircle size={16} style={{ color: 'var(--warning)', flexShrink: 0 }} />
+              <span style={{ fontSize: 13.5, color: 'var(--text-primary)', fontWeight: 500 }}>No deadline specified in the assignment brief.</span>
             </div>
           : <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
               {analysis.deadlines.map((d, i) => {
@@ -296,15 +296,15 @@ export default function AnalysisResult() {
         <Section icon={<AlertTriangle size={16} />} title={`Issues & Ambiguities (${analysis.ambiguities.length})`} defaultOpen>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
             {analysis.ambiguities.map((a, i) => (
-              <div key={i} style={{ padding: '12px 14px', background: a.type === 'conflicting' ? '#fff1f2' : '#fffbeb', border: `1px solid ${a.type === 'conflicting' ? '#fecdd3' : '#fde68a'}`, borderRadius: 'var(--radius)' }}>
-                <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 4 }}>
-                  <AlertTriangle size={14} style={{ color: a.type === 'conflicting' ? 'var(--danger)' : 'var(--warning)', flexShrink: 0 }} />
-                  <span style={{ fontWeight: 600, fontSize: 13.5 }}>{a.issue}</span>
+              <div key={i} style={{ padding: '14px 16px', background: a.type === 'conflicting' ? 'var(--danger-light)' : 'var(--warning-light)', border: '1px solid var(--border)', borderRadius: 'var(--radius)' }}>
+                <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 6 }}>
+                  <AlertTriangle size={15} style={{ color: a.type === 'conflicting' ? 'var(--danger)' : 'var(--warning)', flexShrink: 0 }} />
+                  <span style={{ fontWeight: 700, fontSize: 13.5, color: 'var(--text-primary)' }}>{a.issue}</span>
                   <span className={`badge badge-${a.type === 'conflicting' ? 'danger' : a.type === 'missing' ? 'warning' : 'neutral'}`}>{a.type}</span>
                 </div>
-                {a.reason && <p style={{ fontSize: 13, color: 'var(--text-secondary)', marginBottom: 4 }}>{a.reason}</p>}
+                {a.reason && <p style={{ fontSize: 13, color: 'var(--text-secondary)', marginBottom: 6, lineHeight: 1.5 }}>{a.reason}</p>}
                 {a.recommendation && (
-                  <p style={{ fontSize: 12.5, color: 'var(--primary)', fontStyle: 'italic' }}>
+                  <p style={{ fontSize: 12.5, color: 'var(--primary)', fontWeight: 500, fontStyle: 'italic' }}>
                     💡 {a.recommendation}
                   </p>
                 )}
